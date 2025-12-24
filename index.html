@@ -31,14 +31,14 @@
         }
         
         .half-circle {
-            width: 80px;
-            height: 40px;
+            width: 50px;
+            height: 30px;
             border: 4px solid #E8D7B8;
             border-top: 4px solid #C9A961;
             border-left: 4px solid #C9A961;
             border-right: 4px solid #C9A961;
             border-bottom: 4px solid transparent;
-            border-radius: 50% 50% 0 0;
+            border-radius: 100% 100% 100% 100%;
             animation: spin 1s linear infinite;
         }
         
@@ -66,8 +66,8 @@
             }
         }
         
-        // Initialize EmailJS (Replace with your public key)
-        // emailjs.init("YOUR_PUBLIC_KEY");
+        // Initialize EmailJS with your Public Key
+        emailjs.init("vW0VXl5PsbOQnRic2");
     </script>
 </head>
 <body class="font-sans text-gray-900 bg-white" style="height: auto; min-height: 100%;" x-data="{ 
@@ -82,10 +82,10 @@
     quickViewQuantity: 1,
     
     products: [
-        { id: 1, name: 'Midnight Elegance Gown', price: 48000, image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800', category: 'evening', sizes: ['XS', 'S', 'M', 'L', 'XL'] },
-        { id: 2, name: 'Golden Hour Dress', price: 39000, image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800', category: 'evening', sizes: ['XS', 'S', 'M', 'L'] },
-        { id: 3, name: 'Urban Chic Ensemble', price: 34000, image: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=800', category: 'casual', sizes: ['S', 'M', 'L', 'XL'] },
-        { id: 4, name: 'Champagne Dreams Gown', price: 55000, image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800', category: 'evening', sizes: ['XS', 'S', 'M', 'L'] },
+        { id: 1, name: 'Midnight Elegance Gown', price: 48000, image: 'img6.jpg', category: 'evening', sizes: ['XS', 'S', 'M', 'L', 'XL'] },
+        { id: 2, name: 'Golden Hour Dress', price: 39000, image: 'img1.jpg', category: 'evening', sizes: ['XS', 'S', 'M', 'L'] },
+        { id: 3, name: 'Urban Chic Ensemble', price: 34000, image: 'img2.jpg', category: 'casual', sizes: ['S', 'M', 'L', 'XL'] },
+        { id: 4, name: 'Champagne Dreams Gown', price: 55000, image: 'img5.jpg', category: 'evening', sizes: ['XS', 'S', 'M', 'L'] },
         { id: 5, name: 'Pearl White Couture', price: 37000, image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800', category: 'casual', sizes: ['XS', 'S', 'M', 'L', 'XL'] },
         { id: 6, name: 'Executive Power Suit', price: 44000, image: 'https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=800', category: 'corporate', sizes: ['S', 'M', 'L', 'XL'] },
         { id: 7, name: 'Sunset Boulevard Dress', price: 38000, image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800', category: 'casual', sizes: ['XS', 'S', 'M', 'L'] },
@@ -312,12 +312,12 @@
     <div x-show="currentPage === 'home'">
         <!-- Hero Section -->
         <section class="relative h-screen mt-24">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600');">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img4.jpg');">
                 <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/70 to-transparent"></div>
             </div>
             <div class="relative h-full flex items-center px-4 sm:px-8 lg:px-16">
                 <div class="max-w-2xl">
-                    <p class="font-sans text-gold text-sm tracking-widest uppercase mb-6">Spring/Summer 2024</p>
+                    <p class="font-sans text-gold text-sm tracking-widest uppercase mb-6"> Wear collection 2026</p>
                     <h1 class="font-serif text-6xl sm:text-7xl lg:text-8xl font-light text-white mb-6 leading-tight">
                         Timeless<br>Elegance
                     </h1>
@@ -347,7 +347,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="group relative overflow-hidden cursor-pointer h-96">
-                        <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800" alt="Evening Collection" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <img src="img3.jpg" alt="Evening Collection" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
                             <h3 class="font-serif text-4xl font-light text-white mb-3">Evening Glamour</h3>
@@ -480,13 +480,13 @@
 
         <!-- Lookbook -->
         <section id="lookbook" class="relative h-screen">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600');">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('img4.jpg');">
                 <div class="absolute inset-0 bg-charcoal/60"></div>
             </div>
             <div class="relative h-full flex items-center justify-center text-center text-white px-4">
                 <div class="max-w-3xl">
                     <p class="font-sans text-gold text-sm tracking-widest uppercase mb-6">Latest Collection</p>
-                    <h2 class="font-serif text-6xl sm:text-7xl font-light mb-8">Spring/Summer 2024</h2>
+                    <h2 class="font-serif text-6xl sm:text-7xl font-light mb-8">Explore Collection 2026 </h2>
                     <p class="font-sans text-xl mb-10 text-gray-200">Explore the season's most captivating looks</p>
                     <button class="bg-gold text-charcoal font-sans font-bold px-12 py-4 uppercase tracking-wider hover:bg-gold-dark transition-all">
                         View Lookbook
@@ -514,9 +514,9 @@
                         </div>
                         <p class="font-serif text-xl text-gray-700 mb-8 leading-relaxed italic">"The quality is exceptional. Every piece feels like it was made just for me. DEBBY has become my go-to for special occasions."</p>
                         <div class="flex items-center">
-                            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=100" alt="Client" class="w-14 h-14 rounded-full object-cover mr-4">
+                            <img src="img2.jpg" alt="Client" class="w-14 h-14 rounded-full object-cover mr-4">
                             <div>
-                                <p class="font-sans font-bold text-sm">Chioma Adeleke</p>
+                                <p class="font-sans font-bold text-sm">Semilore Adeleke</p>
                                 <p class="font-sans text-xs text-gray-500 uppercase tracking-wider">Lagos</p>
                             </div>
                         </div>
@@ -636,7 +636,7 @@
                         <label class="block font-sans text-sm font-semibold tracking-wider uppercase mb-3 text-charcoal">
                             Reference Images (Optional)
                         </label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gold transition-colors">
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gold transition-colors cursor-pointer" id="uploadArea">
                             <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
                             <p class="font-sans text-gray-600 mb-2">Drop images here or click to upload</p>
                             <p class="font-sans text-sm text-gray-500">Upload reference photos, screenshots, or inspiration images (max 5 files)</p>
@@ -722,7 +722,7 @@
                 </div>
 
                 <div class="border-t border-gray-800 pt-8 text-center font-sans text-gray-500 text-sm">
-                    <p>&copy; 2024 DEBBY HAUTE COUTURE. All rights reserved.</p>
+                    <p>&copy; 2026 DEBBY HAUTE COUTURE. All rights reserved.</p>
                 </div>
             </div>
         </footer>
@@ -819,13 +819,13 @@
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div class="relative h-96 lg:h-full order-2 lg:order-1">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800" alt="Founder" class="w-full h-full object-cover">
+                        <img src="img6.jpg" alt="Founder" class="w-full h-full object-cover">
                     </div>
                     <div class="order-1 lg:order-2">
                         <p class="font-sans text-gold text-sm tracking-widest uppercase mb-4">The Visionary</p>
                         <h2 class="font-serif text-5xl font-light mb-6">Meet Deborah</h2>
                         <p class="font-sans text-gray-700 leading-relaxed mb-6">
-                            Deborah Adeyemi, founder and creative director of DEBBY HAUTE COUTURE, has always had an eye for elegance and a passion for empowering women through fashion. With over 15 years of experience in the fashion industry, she brings a unique blend of traditional craftsmanship and contemporary design sensibility to every collection.
+                            Deborah Adeyemi Semilore, founder and creative director of DEBBY HAUTE COUTURE, has always had an eye for elegance and a passion for empowering women through fashion. With over 15 years of experience in the fashion industry, she brings a unique blend of traditional craftsmanship and contemporary design sensibility to every collection.
                         </p>
                         <p class="font-sans text-gray-700 leading-relaxed mb-6">
                             "Fashion is more than just clothing—it's about confidence, self-expression, and feeling beautiful in your own skin," says Deborah. "Every piece we create at DEBBY is designed with this philosophy in mind."
@@ -1277,102 +1277,165 @@
                     formMessage.textContent = '';
                     formMessage.className = 'mt-4 font-sans text-sm';
                     
-                    // EmailJS setup required:
-                    // 1. Sign up at https://www.emailjs.com
-                    // 2. Create an email template
-                    // 3. Get your Service ID, Template ID, and Public Key
-                    // 4. Uncomment and fill in the details below
+                    // Collect form data
+                    const formData = new FormData(this);
+                    const formProps = Object.fromEntries(formData);
                     
-                    /*
-                    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this, 'YOUR_PUBLIC_KEY')
-                        .then(function() {
-                            formMessage.textContent = 'Thank you! Your request has been sent successfully. We\'ll respond within 24 hours.';
-                            formMessage.className = 'mt-4 font-sans text-sm text-green-600';
-                            form.reset();
-                        })
-                        .catch(function(error) {
-                            formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact us directly.';
-                            formMessage.className = 'mt-4 font-sans text-sm text-red-600';
-                            console.error('EmailJS Error:', error);
-                        })
-                        .finally(function() {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = 'Submit Request';
-                        });
-                    */
-                    
-                    // For now, simulate success
-                    setTimeout(function() {
-                        formMessage.textContent = 'Thank you! Your request has been sent successfully. We\'ll respond within 24 hours.';
-                        formMessage.className = 'mt-4 font-sans text-sm text-green-600';
-                        form.reset();
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = 'Submit Request';
-                    }, 1500);
-                });
-            }
-            
-            // File upload handling
-            const fileInput = document.getElementById('fileInput');
-            const uploadArea = fileInput?.parentElement;
-            
-            if (uploadArea && fileInput) {
-                uploadArea.addEventListener('click', function() {
-                    fileInput.click();
-                });
-                
-                fileInput.addEventListener('change', function() {
-                    if (this.files.length > 0) {
-                        uploadArea.innerHTML = `
-                            <i class="fas fa-check-circle text-4xl text-green-500 mb-2"></i>
-                            <p class="font-sans text-green-600 mb-1">${this.files.length} file(s) selected</p>
-                            <p class="font-sans text-sm text-gray-500">Click to change files</p>
-                        `;
-                    }
-                });
-                
-                // Drag and drop functionality
-                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                    uploadArea.addEventListener(eventName, preventDefaults, false);
-                });
-                
-                function preventDefaults(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                
-                ['dragenter', 'dragover'].forEach(eventName => {
-                    uploadArea.addEventListener(eventName, highlight, false);
-                });
-                
-                ['dragleave', 'drop'].forEach(eventName => {
-                    uploadArea.addEventListener(eventName, unhighlight, false);
-                });
-                
-                function highlight() {
-                    uploadArea.classList.add('border-gold', 'bg-gold-light/20');
-                }
-                
-                function unhighlight() {
-                    uploadArea.classList.remove('border-gold', 'bg-gold-light/20');
-                }
-                
-                uploadArea.addEventListener('drop', handleDrop, false);
-                
-                function handleDrop(e) {
-                    const dt = e.dataTransfer;
-                    const files = dt.files;
-                    fileInput.files = files;
+                    // Handle file upload if exists
+                    const fileInput = document.querySelector('input[name="reference_images"]');
+                    const files = fileInput.files;
                     
                     if (files.length > 0) {
-                        uploadArea.innerHTML = `
-                            <i class="fas fa-check-circle text-4xl text-green-500 mb-2"></i>
-                            <p class="font-sans text-green-600 mb-1">${files.length} file(s) uploaded</p>
-                            <p class="font-sans text-sm text-gray-500">Click to change files</p>
-                        `;
+                        // Convert files to Base64 (for multiple files)
+                        const filePromises = Array.from(files).map(file => {
+                            return new Promise((resolve, reject) => {
+                                const reader = new FileReader();
+                                reader.onload = (e) => resolve({
+                                    name: file.name,
+                                    type: file.type,
+                                    size: file.size,
+                                    base64: e.target.result,
+                                    url: e.target.result // Base64 string
+                                });
+                                reader.onerror = reject;
+                                reader.readAsDataURL(file);
+                            });
+                        });
+                        
+                        Promise.all(filePromises)
+                            .then(fileData => {
+                                // Add file information to form data
+                                formProps.files = fileData;
+                                formProps.file_count = files.length;
+                                sendEmailJS(formProps);
+                            })
+                            .catch(error => {
+                                console.error('File processing error:', error);
+                                // Send without files if processing fails
+                                sendEmailJS(formProps);
+                            });
+                    } else {
+                        sendEmailJS(formProps);
+                    }
+                    
+                    function sendEmailJS(formData) {
+                        // Format the data for EmailJS
+                        const templateParams = {
+                            full_name: formData.user_name,
+                            email: formData.user_email,
+                            phone: formData.user_phone || 'Not provided',
+                            request_type: formData.request_type,
+                            message: formData.message,
+                            file_count: formData.file_count || 'No files uploaded',
+                            files_info: formData.files ? `${formData.files.length} files uploaded` : 'No files'
+                        };
+                        
+                        // Send email using EmailJS
+                        emailjs.send('service_q6a199l', 'template_udyis9f', templateParams)
+                            .then(function(response) {
+                                console.log('SUCCESS!', response.status, response.text);
+                                formMessage.textContent = 'Thank you! Your request has been sent successfully. We\'ll respond within 24 hours.';
+                                formMessage.className = 'mt-4 font-sans text-sm text-green-600';
+                                form.reset();
+                                
+                                // Reset file upload area
+                                const uploadArea = document.getElementById('uploadArea');
+                                if (uploadArea) {
+                                    uploadArea.innerHTML = `
+                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                        <p class="font-sans text-gray-600 mb-2">Drop images here or click to upload</p>
+                                        <p class="font-sans text-sm text-gray-500">Upload reference photos, screenshots, or inspiration images (max 5 files)</p>
+                                        <input type="file" name="reference_images" multiple accept="image/*" class="hidden" id="fileInput">
+                                    `;
+                                    // Reattach file input event listeners
+                                    setupFileUpload();
+                                }
+                            })
+                            .catch(function(error) {
+                                console.error('FAILED...', error);
+                                formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact us directly.';
+                                formMessage.className = 'mt-4 font-sans text-sm text-red-600';
+                            })
+                            .finally(function() {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = 'Submit Request';
+                            });
+                    }
+                });
+            }
+            
+            // File upload handling function
+            function setupFileUpload() {
+                const fileInput = document.getElementById('fileInput');
+                const uploadArea = document.getElementById('uploadArea');
+                
+                if (uploadArea && fileInput) {
+                    uploadArea.addEventListener('click', function() {
+                        fileInput.click();
+                    });
+                    
+                    fileInput.addEventListener('change', function() {
+                        if (this.files.length > 0) {
+                            uploadArea.innerHTML = `
+                                <i class="fas fa-check-circle text-4xl text-green-500 mb-2"></i>
+                                <p class="font-sans text-green-600 mb-1">${this.files.length} file(s) selected</p>
+                                <p class="font-sans text-sm text-gray-500">Click to change files</p>
+                                <input type="file" name="reference_images" multiple accept="image/*" class="hidden" id="fileInput">
+                            `;
+                            // Update the file input reference
+                            const newFileInput = uploadArea.querySelector('#fileInput');
+                            setupFileUpload(); // Reattach event listeners
+                        }
+                    });
+                    
+                    // Drag and drop functionality
+                    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                        uploadArea.addEventListener(eventName, preventDefaults, false);
+                    });
+                    
+                    function preventDefaults(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    
+                    ['dragenter', 'dragover'].forEach(eventName => {
+                        uploadArea.addEventListener(eventName, highlight, false);
+                    });
+                    
+                    ['dragleave', 'drop'].forEach(eventName => {
+                        uploadArea.addEventListener(eventName, unhighlight, false);
+                    });
+                    
+                    function highlight() {
+                        uploadArea.classList.add('border-gold', 'bg-gold-light/20');
+                    }
+                    
+                    function unhighlight() {
+                        uploadArea.classList.remove('border-gold', 'bg-gold-light/20');
+                    }
+                    
+                    uploadArea.addEventListener('drop', handleDrop, false);
+                    
+                    function handleDrop(e) {
+                        const dt = e.dataTransfer;
+                        const files = dt.files;
+                        
+                        // Create a new FileList-like structure
+                        const dataTransfer = new DataTransfer();
+                        for (let file of files) {
+                            dataTransfer.items.add(file);
+                        }
+                        fileInput.files = dataTransfer.files;
+                        
+                        // Trigger change event
+                        const event = new Event('change');
+                        fileInput.dispatchEvent(event);
                     }
                 }
             }
+            
+            // Initialize file upload on page load
+            setupFileUpload();
         });
     </script>
 </body>
