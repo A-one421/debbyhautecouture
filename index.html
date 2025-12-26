@@ -46,85 +46,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        .measurement-table {
-            transition: all 0.3s ease;
-        }
-        
-        .unit-toggle {
-            position: relative;
-            width: 80px;
-            height: 34px;
-        }
-        
-        .unit-toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .unit-toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #f3f3f3;
-            transition: .4s;
-            border-radius: 34px;
-            border: 1px solid #ddd;
-        }
-        
-        .unit-toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .unit-toggle input:checked + .unit-toggle-slider {
-            background-color: #C9A961;
-        }
-        
-        .unit-toggle input:checked + .unit-toggle-slider:before {
-            transform: translateX(44px);
-        }
-        
-        .unit-toggle-labels {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 8px;
-            font-size: 12px;
-            font-weight: 600;
-            pointer-events: none;
-        }
-        
-        .unit-toggle-label-in {
-            color: #C9A961;
-        }
-        
-        .unit-toggle-label-cm {
-            color: #666;
-        }
-        
-        .unit-toggle input:checked ~ .unit-toggle-labels .unit-toggle-label-in {
-            color: #666;
-        }
-        
-        .unit-toggle input:checked ~ .unit-toggle-labels .unit-toggle-label-cm {
-            color: white;
-        }
     </style>
     
     <script>
@@ -159,62 +80,17 @@
     selectedProduct: null,
     selectedSize: null,
     quickViewQuantity: 1,
-    showMeasurements: false,
-    measurementUnit: 'inches', // 'inches' or 'cm'
     
-    // Size chart data for all products
+    // Size chart data (basic version for quick view)
     sizeCharts: {
-        1: { // Midnight Elegance Gown
-            XS: { bust: 32, waist: 24, hips: 35, length: 58, shoulder: 14 },
-            S: { bust: 34, waist: 26, hips: 37, length: 59, shoulder: 14.5 },
-            M: { bust: 36, waist: 28, hips: 39, length: 60, shoulder: 15 },
-            L: { bust: 38, waist: 30, hips: 41, length: 61, shoulder: 15.5 },
-            XL: { bust: 40, waist: 32, hips: 43, length: 62, shoulder: 16 }
-        },
-        2: { // Golden Hour Dress
-            XS: { bust: 31, waist: 23, hips: 34, length: 56, shoulder: 13.5 },
-            S: { bust: 33, waist: 25, hips: 36, length: 57, shoulder: 14 },
-            M: { bust: 35, waist: 27, hips: 38, length: 58, shoulder: 14.5 },
-            L: { bust: 37, waist: 29, hips: 40, length: 59, shoulder: 15 }
-        },
-        3: { // Urban Chic Ensemble
-            S: { bust: 34, waist: 26, hips: 37, length: 45, shoulder: 14.5 },
-            M: { bust: 36, waist: 28, hips: 39, length: 46, shoulder: 15 },
-            L: { bust: 38, waist: 30, hips: 41, length: 47, shoulder: 15.5 },
-            XL: { bust: 40, waist: 32, hips: 43, length: 48, shoulder: 16 }
-        },
-        4: { // Champagne Dreams Gown
-            XS: { bust: 32, waist: 24, hips: 35, length: 62, shoulder: 14 },
-            S: { bust: 34, waist: 26, hips: 37, length: 63, shoulder: 14.5 },
-            M: { bust: 36, waist: 28, hips: 39, length: 64, shoulder: 15 },
-            L: { bust: 38, waist: 30, hips: 41, length: 65, shoulder: 15.5 }
-        },
-        5: { // Pearl White Couture
-            XS: { bust: 31, waist: 23, hips: 34, length: 52, shoulder: 13.5 },
-            S: { bust: 33, waist: 25, hips: 36, length: 53, shoulder: 14 },
-            M: { bust: 35, waist: 27, hips: 38, length: 54, shoulder: 14.5 },
-            L: { bust: 37, waist: 29, hips: 40, length: 55, shoulder: 15 },
-            XL: { bust: 39, waist: 31, hips: 42, length: 56, shoulder: 15.5 }
-        },
-        6: { // Executive Power Suit
-            S: { bust: 34, waist: 26, hips: 37, length: 42, shoulder: 14.5 },
-            M: { bust: 36, waist: 28, hips: 39, length: 43, shoulder: 15 },
-            L: { bust: 38, waist: 30, hips: 41, length: 44, shoulder: 15.5 },
-            XL: { bust: 40, waist: 32, hips: 43, length: 45, shoulder: 16 }
-        },
-        7: { // Sunset Boulevard Dress
-            XS: { bust: 31, waist: 23, hips: 34, length: 54, shoulder: 13.5 },
-            S: { bust: 33, waist: 25, hips: 36, length: 55, shoulder: 14 },
-            M: { bust: 35, waist: 27, hips: 38, length: 56, shoulder: 14.5 },
-            L: { bust: 37, waist: 29, hips: 40, length: 57, shoulder: 15 }
-        },
-        8: { // Royal Affair Gown
-            XS: { bust: 32, waist: 24, hips: 35, length: 64, shoulder: 14 },
-            S: { bust: 34, waist: 26, hips: 37, length: 65, shoulder: 14.5 },
-            M: { bust: 36, waist: 28, hips: 39, length: 66, shoulder: 15 },
-            L: { bust: 38, waist: 30, hips: 41, length: 67, shoulder: 15.5 },
-            XL: { bust: 40, waist: 32, hips: 43, length: 68, shoulder: 16 }
-        }
+        1: { XS: { bust: 32, waist: 24, hips: 35 }, S: { bust: 34, waist: 26, hips: 37 }, M: { bust: 36, waist: 28, hips: 39 }, L: { bust: 38, waist: 30, hips: 41 }, XL: { bust: 40, waist: 32, hips: 43 } },
+        2: { XS: { bust: 31, waist: 23, hips: 34 }, S: { bust: 33, waist: 25, hips: 36 }, M: { bust: 35, waist: 27, hips: 38 }, L: { bust: 37, waist: 29, hips: 40 } },
+        3: { S: { bust: 34, waist: 26, hips: 37 }, M: { bust: 36, waist: 28, hips: 39 }, L: { bust: 38, waist: 30, hips: 41 }, XL: { bust: 40, waist: 32, hips: 43 } },
+        4: { XS: { bust: 32, waist: 24, hips: 35 }, S: { bust: 34, waist: 26, hips: 37 }, M: { bust: 36, waist: 28, hips: 39 }, L: { bust: 38, waist: 30, hips: 41 } },
+        5: { XS: { bust: 31, waist: 23, hips: 34 }, S: { bust: 33, waist: 25, hips: 36 }, M: { bust: 35, waist: 27, hips: 38 }, L: { bust: 37, waist: 29, hips: 40 }, XL: { bust: 39, waist: 31, hips: 42 } },
+        6: { S: { bust: 34, waist: 26, hips: 37 }, M: { bust: 36, waist: 28, hips: 39 }, L: { bust: 38, waist: 30, hips: 41 }, XL: { bust: 40, waist: 32, hips: 43 } },
+        7: { XS: { bust: 31, waist: 23, hips: 34 }, S: { bust: 33, waist: 25, hips: 36 }, M: { bust: 35, waist: 27, hips: 38 }, L: { bust: 37, waist: 29, hips: 40 } },
+        8: { XS: { bust: 32, waist: 24, hips: 35 }, S: { bust: 34, waist: 26, hips: 37 }, M: { bust: 36, waist: 28, hips: 39 }, L: { bust: 38, waist: 30, hips: 41 }, XL: { bust: 40, waist: 32, hips: 43 } }
     },
     
     products: [
@@ -230,58 +106,16 @@
     
     // Track selected sizes for each product
     selectedSizes: {},
-    // Track if measurements are shown for each product
-    showMeasurementsForProduct: {},
     
-    // Convert inches to cm
-    inchesToCm(inches) {
-        return Math.round(inches * 2.54 * 10) / 10;
+    // Function to open size chart page
+    openSizeChart(productId) {
+        // Open size chart in a new tab
+        window.open(`size-chart.html?product=${productId}`, '_blank');
     },
     
-    // Get measurement value based on selected unit
-    getMeasurement(value) {
-        if (this.measurementUnit === 'inches') {
-            return value;
-        } else {
-            return this.inchesToCm(value);
-        }
-    },
-    
-    // Get measurement unit symbol
-    getUnitSymbol() {
-        return this.measurementUnit === 'inches' ? 'in' : 'cm';
-    },
-    
-    // Toggle measurement unit
-    toggleMeasurementUnit() {
-        this.measurementUnit = this.measurementUnit === 'inches' ? 'cm' : 'inches';
-    },
-    
-    // Select size and show measurements
-    selectSize(productId, size) {
-        this.selectedSizes[productId] = size;
-        this.showMeasurementsForProduct[productId] = true;
-    },
-    
-    // Get selected size for product
-    getSelectedSize(productId) {
-        return this.selectedSizes[productId] || '';
-    },
-    
-    // Get size chart for product
-    getSizeChart(productId) {
-        return this.sizeCharts[productId] || {};
-    },
-    
-    // Get measurements for selected size of product
-    getMeasurements(productId, size) {
-        const chart = this.getSizeChart(productId);
-        return chart[size] || null;
-    },
-    
-    // Toggle measurements visibility for product
-    toggleMeasurements(productId) {
-        this.showMeasurementsForProduct[productId] = !this.showMeasurementsForProduct[productId];
+    // Function to open size chart in same window
+    openSizeChartInSameWindow(productId) {
+        window.location.href = `size-chart.html?product=${productId}`;
     },
     
     addToCart(product, size) {
@@ -323,6 +157,19 @@
         this.selectedProduct = product;
         this.selectedSize = product.sizes[0];
         this.quickViewQuantity = 1;
+    },
+    
+    selectSize(productId, size) {
+        this.selectedSizes[productId] = size;
+    },
+    
+    getSelectedSize(productId) {
+        return this.selectedSizes[productId] || '';
+    },
+    
+    getSizeMeasurements(productId, size) {
+        const chart = this.sizeCharts[productId];
+        return chart ? chart[size] : null;
     },
     
     whatsappOrder(product, size, quantity = 1) {
@@ -567,7 +414,7 @@
         </section>
 
         <!-- Best Sellers -->
-        <section class="py-24 px-4 bg-gray-50">
+        <section id="shop" class="py-24 px-4 bg-gray-50">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-20">
                     <p class="font-sans text-gold text-sm tracking-widest uppercase mb-4">Most Loved</p>
@@ -600,42 +447,11 @@
                                     </template>
                                 </div>
                                 
-                                <!-- Size Measurements Section -->
-                                <div x-show="showMeasurementsForProduct[product.id] && getSelectedSize(product.id)" class="measurement-table mt-4 mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                                    <div class="flex justify-between items-center mb-3">
-                                        <h4 class="font-sans font-bold text-sm tracking-wider uppercase text-charcoal">Size Measurements</h4>
-                                        <label class="unit-toggle">
-                                            <input type="checkbox" x-model="measurementUnit" @change="toggleMeasurementUnit()">
-                                            <span class="unit-toggle-slider"></span>
-                                            <div class="unit-toggle-labels">
-                                                <span class="unit-toggle-label-in">in</span>
-                                                <span class="unit-toggle-label-cm">cm</span>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="space-y-2">
-                                        <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                            <span class="text-gray-600">Bust:</span>
-                                            <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.bust) + ' ' + getUnitSymbol()"></span>
-                                        </div>
-                                        <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                            <span class="text-gray-600">Waist:</span>
-                                            <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.waist) + ' ' + getUnitSymbol()"></span>
-                                        </div>
-                                        <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                            <span class="text-gray-600">Hips:</span>
-                                            <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.hips) + ' ' + getUnitSymbol()"></span>
-                                        </div>
-                                        <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                            <span class="text-gray-600">Length:</span>
-                                            <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.length) + ' ' + getUnitSymbol()"></span>
-                                        </div>
-                                        <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                            <span class="text-gray-600">Shoulder:</span>
-                                            <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.shoulder) + ' ' + getUnitSymbol()"></span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Size Chart Link -->
+                                <button @click="openSizeChart(product.id)" 
+                                        class="w-full border border-gray-300 text-charcoal font-sans font-semibold py-2 text-sm tracking-wider uppercase hover:border-gold hover:text-gold transition-colors mb-3">
+                                    <i class="fas fa-ruler mr-2"></i> View Size Chart
+                                </button>
                                 
                                 <button @click="addToCart(product, getSelectedSize(product.id))" class="w-full bg-charcoal text-white font-sans font-semibold py-3 text-sm tracking-wider uppercase hover:bg-gold hover:text-charcoal transition-colors">
                                     Add to Cart
@@ -814,7 +630,7 @@
                     </div>
 
                     <div>
-                        <label class="block font-sans text-sm font-semibold tracking-widest uppercase mb-3 text-charcoal">
+                        <label class="block font-sans text-sm font-semibold tracking-wider uppercase mb-3 text-charcoal">
                             Phone Number
                         </label>
                         <input type="tel" name="user_phone" 
@@ -823,7 +639,7 @@
                     </div>
 
                     <div>
-                        <label class="block font-sans text-sm font-semibold tracking-widest uppercase mb-3 text-charcoal">
+                        <label class="block font-sans text-sm font-semibold tracking-wider uppercase mb-3 text-charcoal">
                             Request Type *
                         </label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -843,7 +659,7 @@
                     </div>
 
                     <div>
-                        <label class="block font-sans text-sm font-semibold tracking-widest uppercase mb-3 text-charcoal">
+                        <label class="block font-sans text-sm font-semibold tracking-wider uppercase mb-3 text-charcoal">
                             Describe Your Request or Complaint *
                         </label>
                         <textarea name="message" required rows="6"
@@ -1304,42 +1120,11 @@
                                             </template>
                                         </div>
                                         
-                                        <!-- Size Measurements Section -->
-                                        <div x-show="showMeasurementsForProduct[product.id] && getSelectedSize(product.id)" class="measurement-table mt-4 mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                                            <div class="flex justify-between items-center mb-3">
-                                                <h4 class="font-sans font-bold text-sm tracking-wider uppercase text-charcoal">Size Measurements</h4>
-                                                <label class="unit-toggle">
-                                                    <input type="checkbox" x-model="measurementUnit" @change="toggleMeasurementUnit()">
-                                                    <span class="unit-toggle-slider"></span>
-                                                    <div class="unit-toggle-labels">
-                                                        <span class="unit-toggle-label-in">in</span>
-                                                        <span class="unit-toggle-label-cm">cm</span>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                            <div class="space-y-2">
-                                                <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                                    <span class="text-gray-600">Bust:</span>
-                                                    <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.bust) + ' ' + getUnitSymbol()"></span>
-                                                </div>
-                                                <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                                    <span class="text-gray-600">Waist:</span>
-                                                    <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.waist) + ' ' + getUnitSymbol()"></span>
-                                                </div>
-                                                <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                                    <span class="text-gray-600">Hips:</span>
-                                                    <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.hips) + ' ' + getUnitSymbol()"></span>
-                                                </div>
-                                                <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                                    <span class="text-gray-600">Length:</span>
-                                                    <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.length) + ' ' + getUnitSymbol()"></span>
-                                                </div>
-                                                <div class="flex justify-between font-sans text-sm" x-show="getMeasurements(product.id, getSelectedSize(product.id))">
-                                                    <span class="text-gray-600">Shoulder:</span>
-                                                    <span class="font-bold" x-text="getMeasurement(getMeasurements(product.id, getSelectedSize(product.id))?.shoulder) + ' ' + getUnitSymbol()"></span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <!-- Size Chart Link -->
+                                        <button @click="openSizeChart(product.id)" 
+                                                class="w-full border border-gray-300 text-charcoal font-sans font-semibold py-2 text-sm tracking-wider uppercase hover:border-gold hover:text-gold transition-colors mb-3">
+                                            <i class="fas fa-ruler mr-2"></i> View Size Chart
+                                        </button>
                                         
                                         <button @click="addToCart(product, getSelectedSize(product.id))" class="w-full bg-charcoal text-white font-sans font-semibold py-3 text-sm tracking-wider uppercase hover:bg-gold hover:text-charcoal transition-colors">
                                             Add to Cart
@@ -1422,7 +1207,7 @@
 
     <!-- Product Quick View Modal -->
     <div x-show="selectedProduct !== null" @click.away="selectedProduct = null" x-transition class="fixed inset-0 bg-charcoal/90 z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div @click.stop class="bg-white max-w-6xl w-full my-8" x-show="selectedProduct !== null">
+        <div @click.stop class="bg-white max-w-5xl w-full my-8" x-show="selectedProduct !== null">
             <div class="flex justify-between items-center p-8 border-b border-gray-200">
                 <h2 class="font-serif text-3xl font-light">Product Details</h2>
                 <button @click="selectedProduct = null" class="text-gray-500 hover:text-charcoal">
@@ -1431,7 +1216,7 @@
             </div>
             
             <div class="p-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div>
                         <img :src="selectedProduct?.image" :alt="selectedProduct?.name" class="w-full h-96 object-cover mb-4">
                         <div class="grid grid-cols-3 gap-3">
@@ -1445,84 +1230,12 @@
                         <h3 class="font-serif text-4xl font-light mb-4" x-text="selectedProduct?.name"></h3>
                         <p class="text-gold font-sans font-bold text-3xl mb-8">₦<span x-text="selectedProduct?.price.toLocaleString()"></span></p>
                         
-                        <!-- Complete Size Chart -->
-                        <div class="mb-8">
-                            <div class="flex justify-between items-center mb-4">
-                                <h4 class="font-sans font-bold text-sm tracking-widest uppercase">Full Size Chart:</h4>
-                                <label class="unit-toggle">
-                                    <input type="checkbox" x-model="measurementUnit" @change="toggleMeasurementUnit()">
-                                    <span class="unit-toggle-slider"></span>
-                                    <div class="unit-toggle-labels">
-                                        <span class="unit-toggle-label-in">in</span>
-                                        <span class="unit-toggle-label-cm">cm</span>
-                                    </div>
-                                </label>
-                            </div>
-                            
-                            <div class="overflow-x-auto">
-                                <table class="w-full border-collapse">
-                                    <thead>
-                                        <tr class="bg-gray-50">
-                                            <th class="border border-gray-200 px-4 py-3 text-left font-sans text-xs font-semibold tracking-wider uppercase">Size</th>
-                                            <th class="border border-gray-200 px-4 py-3 text-left font-sans text-xs font-semibold tracking-wider uppercase">Bust</th>
-                                            <th class="border border-gray-200 px-4 py-3 text-left font-sans text-xs font-semibold tracking-wider uppercase">Waist</th>
-                                            <th class="border border-gray-200 px-4 py-3 text-left font-sans text-xs font-semibold tracking-wider uppercase">Hips</th>
-                                            <th class="border border-gray-200 px-4 py-3 text-left font-sans text-xs font-semibold tracking-wider uppercase">Length</th>
-                                            <th class="border border-gray-200 px-4 py-3 text-left font-sans text-xs font-semibold tracking-wider uppercase">Shoulder</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <template x-for="size in selectedProduct?.sizes" :key="size">
-                                            <tr :class="selectedSize === size ? 'bg-gold-light' : ''">
-                                                <td class="border border-gray-200 px-4 py-3 font-sans text-sm font-semibold" x-text="size"></td>
-                                                <td class="border border-gray-200 px-4 py-3 font-sans text-sm" x-text="getMeasurement(getMeasurements(selectedProduct?.id, size)?.bust) + ' ' + getUnitSymbol()"></td>
-                                                <td class="border border-gray-200 px-4 py-3 font-sans text-sm" x-text="getMeasurement(getMeasurements(selectedProduct?.id, size)?.waist) + ' ' + getUnitSymbol()"></td>
-                                                <td class="border border-gray-200 px-4 py-3 font-sans text-sm" x-text="getMeasurement(getMeasurements(selectedProduct?.id, size)?.hips) + ' ' + getUnitSymbol()"></td>
-                                                <td class="border border-gray-200 px-4 py-3 font-sans text-sm" x-text="getMeasurement(getMeasurements(selectedProduct?.id, size)?.length) + ' ' + getUnitSymbol()"></td>
-                                                <td class="border border-gray-200 px-4 py-3 font-sans text-sm" x-text="getMeasurement(getMeasurements(selectedProduct?.id, size)?.shoulder) + ' ' + getUnitSymbol()"></td>
-                                            </tr>
-                                        </template>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <p class="mt-3 text-xs text-gray-500 font-sans">All measurements are in body measurements. For garment measurements, add 1-2 <span x-text="getUnitSymbol()"></span> for ease.</p>
-                        </div>
+                        <!-- Size Chart Link -->
+                        <button @click="openSizeChart(selectedProduct?.id)" 
+                                class="w-full border border-gray-300 text-charcoal font-sans font-semibold py-3 text-sm tracking-wider uppercase hover:border-gold hover:text-gold transition-colors mb-6">
+                            <i class="fas fa-ruler-combined mr-2"></i> View Complete Size Chart
+                        </button>
                         
-                        <!-- Selected Size Details -->
-                        <div class="mb-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                            <div class="flex items-center justify-between mb-3">
-                                <h4 class="font-sans font-bold text-sm tracking-wider uppercase">Selected Size: <span class="text-gold" x-text="selectedSize"></span></h4>
-                                <span class="font-sans text-sm text-gray-600">Measurements shown in <span class="font-bold" x-text="measurementUnit"></span></span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="space-y-2">
-                                    <div class="flex justify-between font-sans text-sm">
-                                        <span class="text-gray-600">Bust:</span>
-                                        <span class="font-bold" x-text="getMeasurements(selectedProduct?.id, selectedSize) ? getMeasurement(getMeasurements(selectedProduct?.id, selectedSize).bust) + ' ' + getUnitSymbol() : 'N/A'"></span>
-                                    </div>
-                                    <div class="flex justify-between font-sans text-sm">
-                                        <span class="text-gray-600">Waist:</span>
-                                        <span class="font-bold" x-text="getMeasurements(selectedProduct?.id, selectedSize) ? getMeasurement(getMeasurements(selectedProduct?.id, selectedSize).waist) + ' ' + getUnitSymbol() : 'N/A'"></span>
-                                    </div>
-                                    <div class="flex justify-between font-sans text-sm">
-                                        <span class="text-gray-600">Hips:</span>
-                                        <span class="font-bold" x-text="getMeasurements(selectedProduct?.id, selectedSize) ? getMeasurement(getMeasurements(selectedProduct?.id, selectedSize).hips) + ' ' + getUnitSymbol() : 'N/A'"></span>
-                                    </div>
-                                </div>
-                                <div class="space-y-2">
-                                    <div class="flex justify-between font-sans text-sm">
-                                        <span class="text-gray-600">Length:</span>
-                                        <span class="font-bold" x-text="getMeasurements(selectedProduct?.id, selectedSize) ? getMeasurement(getMeasurements(selectedProduct?.id, selectedSize).length) + ' ' + getUnitSymbol() : 'N/A'"></span>
-                                    </div>
-                                    <div class="flex justify-between font-sans text-sm">
-                                        <span class="text-gray-600">Shoulder:</span>
-                                        <span class="font-bold" x-text="getMeasurements(selectedProduct?.id, selectedSize) ? getMeasurement(getMeasurements(selectedProduct?.id, selectedSize).shoulder) + ' ' + getUnitSymbol() : 'N/A'"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="mb-8">
                             <h4 class="font-sans font-bold text-sm tracking-widest uppercase mb-4">Select Size:</h4>
                             <div class="flex flex-wrap gap-3">
@@ -1534,6 +1247,25 @@
                                         x-text="size">
                                     </button>
                                 </template>
+                            </div>
+                            
+                            <!-- Quick size measurements -->
+                            <div x-show="selectedSize && getSizeMeasurements(selectedProduct?.id, selectedSize)" class="mt-4 p-4 bg-gray-50 rounded-lg">
+                                <p class="font-sans text-sm font-semibold mb-2">Size <span x-text="selectedSize"></span> Measurements:</p>
+                                <div class="grid grid-cols-3 gap-2 text-sm">
+                                    <div class="text-center">
+                                        <span class="text-gray-600">Bust:</span>
+                                        <p class="font-bold" x-text="getSizeMeasurements(selectedProduct?.id, selectedSize)?.bust + ' in'"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <span class="text-gray-600">Waist:</span>
+                                        <p class="font-bold" x-text="getSizeMeasurements(selectedProduct?.id, selectedSize)?.waist + ' in'"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <span class="text-gray-600">Hips:</span>
+                                        <p class="font-bold" x-text="getSizeMeasurements(selectedProduct?.id, selectedSize)?.hips + ' in'"></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -1594,6 +1326,20 @@
             setTimeout(() => {
                 preloader.classList.add('hidden');
             }, 1500);
+            
+            // Check for pending cart items from size chart
+            const pendingCartItem = localStorage.getItem('pendingCartItem');
+            if (pendingCartItem) {
+                try {
+                    const item = JSON.parse(pendingCartItem);
+                    // You would add this to cart here
+                    // For now, just show a notification
+                    alert(`Product added to cart from size chart! Size: ${item.size}, Quantity: ${item.quantity}`);
+                    localStorage.removeItem('pendingCartItem');
+                } catch (e) {
+                    console.error('Error parsing cart item:', e);
+                }
+            }
         });
 
         // EmailJS Integration for Contact Form
