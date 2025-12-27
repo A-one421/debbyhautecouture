@@ -75,11 +75,9 @@
     cartOpen: false, 
     searchOpen: false,
     currentPage: 'home',
-    cart: [],
+    cart: JSON.parse(localStorage.getItem('debbyCart')) || [],
     wishlist: [],
-    selectedProduct: null,
     selectedSize: null,
-    quickViewQuantity: 1,
     
     // Size chart data (basic version for quick view)
     sizeCharts: {
@@ -129,11 +127,15 @@
         } else {
             this.cart.push({ ...product, size, quantity: 1 });
         }
+        // Save to localStorage
+        localStorage.setItem('debbyCart', JSON.stringify(this.cart));
         this.cartOpen = true;
     },
     
     removeFromCart(index) {
         this.cart.splice(index, 1);
+        // Save to localStorage
+        localStorage.setItem('debbyCart', JSON.stringify(this.cart));
     },
     
     toggleWishlist(productId) {
@@ -153,12 +155,6 @@
         return this.cart.reduce((total, item) => total + item.quantity, 0);
     },
     
-    openQuickView(product) {
-        this.selectedProduct = product;
-        this.selectedSize = product.sizes[0];
-        this.quickViewQuantity = 1;
-    },
-    
     selectSize(productId, size) {
         this.selectedSizes[productId] = size;
     },
@@ -170,18 +166,6 @@
     getSizeMeasurements(productId, size) {
         const chart = this.sizeCharts[productId];
         return chart ? chart[size] : null;
-    },
-    
-    whatsappOrder(product, size, quantity = 1) {
-        if (!size) {
-            alert('Please select a size first');
-            return;
-        }
-        
-        const message = `Hello DEBBY HAUTE COUTURE! I want to order ${product.name} in size ${size}. Quantity: ${quantity}. Total: ₦${(product.price * quantity).toLocaleString()}`;
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappNumber = '2348066163249'; // REPLACE WITH YOUR WHATSAPP NUMBER
-        window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
     },
     
     whatsappCheckout() {
@@ -429,9 +413,9 @@
                                 <button @click="toggleWishlist(product.id)" class="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-gold transition-colors">
                                     <i class="fas fa-heart" :class="wishlist.includes(product.id) ? 'text-red-500' : 'text-gray-400'"></i>
                                 </button>
-                                <button @click="openQuickView(product)" class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <a :href="'quick-view.html?product=' + product.id" class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                                     <span class="bg-white text-charcoal px-8 py-3 font-sans text-sm tracking-wider uppercase font-semibold">Quick View</span>
-                                </button>
+                                </a>
                             </div>
                             <div class="p-6">
                                 <h3 class="font-serif text-2xl font-light mb-3" x-text="product.name"></h3>
@@ -1102,9 +1086,9 @@
                                         <button @click="toggleWishlist(product.id)" class="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-gold transition-colors">
                                             <i class="fas fa-heart" :class="wishlist.includes(product.id) ? 'text-red-500' : 'text-gray-400'"></i>
                                         </button>
-                                        <button @click="openQuickView(product)" class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                        <a :href="'quick-view.html?product=' + product.id" class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                                             <span class="bg-white text-charcoal px-8 py-3 font-sans text-sm tracking-wider uppercase font-semibold">Quick View</span>
-                                        </button>
+                                        </a>
                                     </div>
                                     <div class="p-6">
                                         <h3 class="font-serif text-2xl font-light mb-3" x-text="product.name"></h3>
@@ -1205,119 +1189,6 @@
         </footer>
     </div>
 
-    <!-- Product Quick View Modal -->
-    <div x-show="selectedProduct !== null" @click.away="selectedProduct = null" x-transition class="fixed inset-0 bg-charcoal/90 z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <div @click.stop class="bg-white max-w-5xl w-full my-8" x-show="selectedProduct !== null">
-            <div class="flex justify-between items-center p-8 border-b border-gray-200">
-                <h2 class="font-serif text-3xl font-light">Product Details</h2>
-                <button @click="selectedProduct = null" class="text-gray-500 hover:text-charcoal">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-            </div>
-            
-            <div class="p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div>
-                        <img :src="selectedProduct?.image" :alt="selectedProduct?.name" class="w-full h-96 object-cover mb-4">
-                        <div class="grid grid-cols-3 gap-3">
-                            <img :src="selectedProduct?.image" class="w-full h-28 object-cover cursor-pointer border-2 border-gold">
-                            <img :src="selectedProduct?.image" class="w-full h-28 object-cover cursor-pointer border-2 border-transparent hover:border-gold transition-colors">
-                            <img :src="selectedProduct?.image" class="w-full h-28 object-cover cursor-pointer border-2 border-transparent hover:border-gold transition-colors">
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="font-serif text-4xl font-light mb-4" x-text="selectedProduct?.name"></h3>
-                        <p class="text-gold font-sans font-bold text-3xl mb-8">₦<span x-text="selectedProduct?.price.toLocaleString()"></span></p>
-                        
-                        <!-- Size Chart Link -->
-                        <button @click="openSizeChart(selectedProduct?.id)" 
-                                class="w-full border border-gray-300 text-charcoal font-sans font-semibold py-3 text-sm tracking-wider uppercase hover:border-gold hover:text-gold transition-colors mb-6">
-                            <i class="fas fa-ruler-combined mr-2"></i> View Complete Size Chart
-                        </button>
-                        
-                        <div class="mb-8">
-                            <h4 class="font-sans font-bold text-sm tracking-widest uppercase mb-4">Select Size:</h4>
-                            <div class="flex flex-wrap gap-3">
-                                <template x-for="size in selectedProduct?.sizes" :key="size">
-                                    <button 
-                                        @click="selectedSize = size"
-                                        class="px-5 py-3 border-2 font-sans text-sm tracking-wider transition-colors"
-                                        :class="selectedSize === size ? 'border-gold text-gold bg-gold-light' : 'border-gray-300 hover:border-gold hover:text-gold'"
-                                        x-text="size">
-                                    </button>
-                                </template>
-                            </div>
-                            
-                            <!-- Quick size measurements -->
-                            <div x-show="selectedSize && getSizeMeasurements(selectedProduct?.id, selectedSize)" class="mt-4 p-4 bg-gray-50 rounded-lg">
-                                <p class="font-sans text-sm font-semibold mb-2">Size <span x-text="selectedSize"></span> Measurements:</p>
-                                <div class="grid grid-cols-3 gap-2 text-sm">
-                                    <div class="text-center">
-                                        <span class="text-gray-600">Bust:</span>
-                                        <p class="font-bold" x-text="getSizeMeasurements(selectedProduct?.id, selectedSize)?.bust + ' in'"></p>
-                                    </div>
-                                    <div class="text-center">
-                                        <span class="text-gray-600">Waist:</span>
-                                        <p class="font-bold" x-text="getSizeMeasurements(selectedProduct?.id, selectedSize)?.waist + ' in'"></p>
-                                    </div>
-                                    <div class="text-center">
-                                        <span class="text-gray-600">Hips:</span>
-                                        <p class="font-bold" x-text="getSizeMeasurements(selectedProduct?.id, selectedSize)?.hips + ' in'"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-8">
-                            <h4 class="font-sans font-bold text-sm tracking-widest uppercase mb-4">Quantity:</h4>
-                            <div class="flex items-center gap-4">
-                                <button @click="quickViewQuantity > 1 ? quickViewQuantity-- : null" class="w-12 h-12 border-2 border-gray-300 flex items-center justify-center hover:border-gold hover:text-gold transition-colors">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <span class="text-xl font-sans font-bold" x-text="quickViewQuantity"></span>
-                                <button @click="quickViewQuantity++" class="w-12 h-12 border-2 border-gray-300 flex items-center justify-center hover:border-gold hover:text-gold transition-colors">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                            <button @click="addToCart(selectedProduct, selectedSize); selectedProduct = null" class="flex-1 bg-gold text-charcoal font-sans font-bold py-4 uppercase tracking-wider hover:bg-gold-dark transition-colors">
-                                Add to Cart
-                            </button>
-                            <button @click="whatsappOrder(selectedProduct, selectedSize, quickViewQuantity); selectedProduct = null" class="flex-1 bg-charcoal text-white font-sans font-bold py-4 uppercase tracking-wider hover:bg-gold hover:text-charcoal transition-colors">
-                                Buy Now via WhatsApp
-                            </button>
-                        </div>
-
-                        <div class="border-t border-gray-200 pt-8">
-                            <h4 class="font-sans font-bold text-sm tracking-widest uppercase mb-4">Details:</h4>
-                            <ul class="space-y-3 font-sans text-gray-700">
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-gold mt-1"></i>
-                                    <span>Premium quality imported fabric</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-gold mt-1"></i>
-                                    <span>Expert tailoring and finishing</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-gold mt-1"></i>
-                                    <span>Perfect fit guaranteed</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fas fa-check text-gold mt-1"></i>
-                                    <span>Dry clean only for best results</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- JavaScript -->
     <script>
         // Preloader
@@ -1326,20 +1197,6 @@
             setTimeout(() => {
                 preloader.classList.add('hidden');
             }, 1500);
-            
-            // Check for pending cart items from size chart
-            const pendingCartItem = localStorage.getItem('pendingCartItem');
-            if (pendingCartItem) {
-                try {
-                    const item = JSON.parse(pendingCartItem);
-                    // You would add this to cart here
-                    // For now, just show a notification
-                    alert(`Product added to cart from size chart! Size: ${item.size}, Quantity: ${item.quantity}`);
-                    localStorage.removeItem('pendingCartItem');
-                } catch (e) {
-                    console.error('Error parsing cart item:', e);
-                }
-            }
         });
 
         // EmailJS Integration for Contact Form
