@@ -6,8 +6,9 @@ export const products = [
     collection: "Evening Collection",
     price: 185,
     image: "/img3.jpg",
-    images: ["/img3.jpg", "/img1.jpg"],
-    description: "Elegant silk cocktail top perfect for evening events.",
+    images: ["/img3.jpg", "/img1.jpg", "/img6.jpg"],
+    description:
+      "Elegant silk cocktail tops perfect for evening events — from camisoles to statement sleeves.",
     sizes: ["XS", "S", "M", "L", "XL"],
     variants: [
       {
@@ -15,27 +16,27 @@ export const products = [
         name: "Silk Cami Top",
         price: 185,
         image: "/img3.jpg",
-        images: ["/img3.jpg", "/img1.jpg"],
+        images: ["/img3.jpg", "/img1.jpg", "/img6.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
-          "Luxurious silk camisole with adjustable spaghetti straps and lace trim.",
+          "Luxurious silk camisole with adjustable spaghetti straps and delicate lace trim. Effortlessly feminine.",
       },
       {
         id: "2-v2",
         name: "Puff Sleeve Blouse",
         price: 210,
         image: "/img1.jpg",
-        images: ["/img1.jpg", "/img3.jpg"],
+        images: ["/img1.jpg", "/img3.jpg", "/img5.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
-          "Statement puff sleeves in crisp silk. A modern romantic piece for any evening.",
+          "Statement puff sleeves in crisp silk. A modern romantic piece that commands attention at any evening affair.",
       },
       {
         id: "2-v3",
         name: "Asymmetric Crop Top",
         price: 165,
         image: "/img6.jpg",
-        images: ["/img6.jpg", "/img3.jpg"],
+        images: ["/img6.jpg", "/img3.jpg", "/img2.jpg"],
         sizes: ["XS", "S", "M", "L"],
         description:
           "Edgy asymmetric cut with one bare shoulder. Pairs perfectly with high-waist trousers.",
@@ -49,12 +50,7 @@ export const products = [
     collection: "Party Collection",
     price: 89,
     image: "/heritage1.jpg",
-    images: [
-      "/heritage1.jpg",
-      "/heritage2.jpg",
-      "/heritage3.jpg",
-      "/heritage4.jpg",
-    ],
+    images: ["/heritage1.jpg", "/A.jpg", "/img1.jpg", "/img6.jpg"],
     description:
       "Shimmering heritage pieces for your next special occasion — beaded, crystal-fringed and unforgettable.",
     tag: "NEW",
@@ -62,43 +58,33 @@ export const products = [
     variants: [
       {
         id: "4-v1",
-        name: "Crystal Fringe Heritage — Front",
+        name: "Fringe Heritage",
         price: 89,
         image: "/heritage1.jpg",
-        images: ["/heritage1.jpg", "/heritage2.jpg"],
+        images: ["/heritage1.jpg", "/heritage2.jpg", "/heritage3.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
           "All-over bead embellishment with cascading crystal fringe shoulders. Party-ready and unforgettable.",
       },
       {
         id: "4-v2",
-        name: "Crystal Fringe Heritage — Full Body",
+        name: "Full Body",
         price: 115,
-        image: "/heritage2.jpg",
-        images: ["/heritage2.jpg", "/heritage1.jpg"],
+        image: "/img3.jpg",
+        images: ["/img6.jpg", "/img5.jpg", "/img2.jpg"],
         sizes: ["S", "M", "L", "XL"],
         description:
-          "Full-length view of the crystal-fringed heritage dress. Knee-length bodycon with dramatic bead work.",
+          "Full-length view of the crystal-fringed heritage dress. Knee-length bodycon with dramatic beadwork.",
       },
       {
         id: "4-v3",
-        name: "Beaded Heritage — Side Drape",
+        name: "Beaded Heritage",
         price: 99,
-        image: "/heritage3.jpg",
-        images: ["/heritage3.jpg", "/heritage4.jpg"],
+        image: "/A.jpg",
+        images: ["/A.jpg", "/C.jpg", "/D.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
           "Side-drape detail with pearl and crystal bead clusters. Where tradition meets high fashion.",
-      },
-      {
-        id: "4-v4",
-        name: "Heritage Close-Up — Bead Detail",
-        price: 109,
-        image: "/heritage4.jpg",
-        images: ["/heritage4.jpg", "/heritage3.jpg"],
-        sizes: ["XS", "S", "M", "L", "XL"],
-        description:
-          "Close-up of the intricate beadwork and crystal chandelier fringe across the shoulders and bodice.",
       },
     ],
   },
@@ -107,10 +93,11 @@ export const products = [
     name: "Lace Blouses",
     category: "tops",
     collection: "Premium Collection",
-    price: 550,
+    price: 420,
     image: "/img1.jpg",
-    images: ["/img1.jpg", "/img5.jpg"],
-    description: "Premium lace blouse with intricate overlay.",
+    images: ["/img1.jpg", "/img5.jpg", "/img3.jpg"],
+    description:
+      "Premium lace blouses with intricate overlay — romantic, timeless, and effortlessly stylish.",
     tag: "NEW",
     sizes: ["XS", "S", "M", "L", "XL"],
     variants: [
@@ -119,30 +106,30 @@ export const products = [
         name: "Victorian Lace Blouse",
         price: 550,
         image: "/img1.jpg",
-        images: ["/img1.jpg", "/img5.jpg"],
+        images: ["/img1.jpg", "/img5.jpg", "/img3.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
-          "High-collar Victorian-inspired lace blouse. Intricate floral lace over a silk slip.",
+          "High-collar Victorian-inspired lace blouse. Intricate floral lace over a silk slip — heirloom quality.",
       },
       {
         id: "7-v2",
         name: "Cropped Lace Top",
         price: 420,
         image: "/img5.jpg",
-        images: ["/img5.jpg", "/img1.jpg"],
+        images: ["/img5.jpg", "/img1.jpg", "/img4.jpg"],
         sizes: ["XS", "S", "M", "L"],
         description:
-          "Modern cropped lace top with scalloped hem. Pairs perfectly with high-rise bottoms.",
+          "Modern cropped lace top with scalloped hem. Pairs perfectly with high-rise bottoms for any occasion.",
       },
       {
         id: "7-v3",
         name: "Lace Poet Blouse",
         price: 480,
         image: "/img3.jpg",
-        images: ["/img3.jpg", "/img1.jpg"],
+        images: ["/img3.jpg", "/img1.jpg", "/img6.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
-          "Billowing poet sleeves in delicate stretch lace. Romantic and effortlessly stylish.",
+          "Billowing poet sleeves in delicate stretch lace. Romantic and effortlessly stylish for every season.",
       },
     ],
   },
@@ -151,10 +138,11 @@ export const products = [
     name: "Tailored Pants",
     category: "pants",
     collection: "Luxury Collection",
-    price: 125,
+    price: 115,
     image: "/img6.jpg",
-    images: ["/img6.jpg", "/img3.jpg"],
-    description: "Impeccably cut trousers for the polished modern woman.",
+    images: ["/img6.jpg", "/img3.jpg", "/img4.jpg"],
+    description:
+      "Impeccably cut trousers for the polished modern woman — fluid, structured, and eternally chic.",
     sizes: ["XS", "S", "M", "L", "XL"],
     variants: [
       {
@@ -162,7 +150,7 @@ export const products = [
         name: "Wide-Leg Trousers",
         price: 125,
         image: "/img6.jpg",
-        images: ["/img6.jpg", "/img3.jpg"],
+        images: ["/img6.jpg", "/img3.jpg", "/img4.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
           "Fluid wide-leg trousers with a high waist. Timeless, effortless, and endlessly flattering.",
@@ -172,7 +160,7 @@ export const products = [
         name: "Cigarette Trousers",
         price: 145,
         image: "/img3.jpg",
-        images: ["/img3.jpg", "/img6.jpg"],
+        images: ["/img3.jpg", "/img6.jpg", "/img5.jpg"],
         sizes: ["XS", "S", "M", "L"],
         description:
           "Slim cigarette-cut with cropped ankle length. The classic boardroom trouser, perfected.",
@@ -182,7 +170,7 @@ export const products = [
         name: "Pleated Paper Bag Pants",
         price: 115,
         image: "/img4.jpg",
-        images: ["/img4.jpg", "/img6.jpg"],
+        images: ["/img4.jpg", "/img6.jpg", "/img2.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
           "Trendy paper-bag waist with front pleats. Comfortable, stylish and very on-trend.",
@@ -196,9 +184,9 @@ export const products = [
     collection: "Heritage Collection",
     price: 145,
     image: "/img5.jpg",
-    images: ["/img5.jpg", "/img2.jpg"],
+    images: ["/img5.jpg", "/img2.jpg", "/haute1.jpg"],
     description:
-      "Vibrant Ankara print suit fusing African heritage with modern tailoring.",
+      "Vibrant Ankara print suits fusing African heritage with modern tailoring — bold, powerful, unmistakable.",
     sizes: ["XS", "S", "M", "L", "XL"],
     variants: [
       {
@@ -206,7 +194,7 @@ export const products = [
         name: "Ankara Blazer & Skirt Set",
         price: 145,
         image: "/img5.jpg",
-        images: ["/img5.jpg", "/img2.jpg"],
+        images: ["/img5.jpg", "/img2.jpg", "/haute1.jpg"],
         sizes: ["XS", "S", "M", "L", "XL"],
         description:
           "Bold Ankara print blazer paired with matching A-line skirt. Heritage meets haute couture.",
@@ -216,7 +204,7 @@ export const products = [
         name: "Ankara Trouser Suit",
         price: 175,
         image: "/img2.jpg",
-        images: ["/img2.jpg", "/img5.jpg"],
+        images: ["/img2.jpg", "/img5.jpg", "/img4.jpg"],
         sizes: ["S", "M", "L", "XL"],
         description:
           "Full-length Ankara trouser suit. A commanding statement of African style and power.",
@@ -228,10 +216,11 @@ export const products = [
     name: "Bridal & Asoebi",
     category: "bridal",
     collection: "Bridal Collection",
-    price: 899,
+    price: 650,
     image: "/img2.jpg",
-    images: ["/img2.jpg", "/img1.jpg"],
-    description: "Stunning bridal pieces for your most memorable day.",
+    images: ["/img2.jpg", "/img1.jpg", "/haute1.jpg"],
+    description:
+      "Stunning bridal pieces for your most memorable day — gowns, Asoebi sets, and reception looks.",
     tag: "BEST",
     sizes: ["S", "M", "L", "XL"],
     variants: [
@@ -240,27 +229,27 @@ export const products = [
         name: "Classic Bridal Gown",
         price: 899,
         image: "/img2.jpg",
-        images: ["/img2.jpg", "/img1.jpg"],
+        images: ["/img2.jpg", "/img1.jpg", "/haute1.jpg"],
         sizes: ["S", "M", "L", "XL"],
         description:
-          "Sweetheart neckline with cathedral-length train. Your dream wedding dress, realized.",
+          "Sweetheart neckline with cathedral-length train. Your dream wedding dress, realized in exquisite detail.",
       },
       {
         id: "10-v2",
         name: "Asoebi Lace Set",
         price: 650,
         image: "/img1.jpg",
-        images: ["/img1.jpg", "/img2.jpg"],
+        images: ["/img1.jpg", "/img2.jpg", "/img5.jpg"],
         sizes: ["S", "M", "L", "XL"],
         description:
-          "Matching George lace blouse and wrapper skirt for the perfect asoebi look.",
+          "Matching George lace blouse and wrapper skirt for the perfect Asoebi look at any celebration.",
       },
       {
         id: "10-v3",
         name: "Bridal Reception Dress",
         price: 750,
-        image: "/img5.jpg",
-        images: ["/img5.jpg", "/img2.jpg"],
+        image: "/haute1.jpg",
+        images: ["/haute1.jpg", "/img5.jpg", "/img2.jpg"],
         sizes: ["S", "M", "L", "XL"],
         description:
           "Chic mini-to-midi reception dress. Make a memorable exit at your own wedding.",
