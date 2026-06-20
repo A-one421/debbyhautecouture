@@ -43,8 +43,9 @@ export const products = [
       },
     ],
   },
+
   {
-    id: "4",
+    id: "5",
     name: "Premium Heritages",
     category: "tops",
     collection: "Party Collection",
@@ -213,46 +214,24 @@ export const products = [
   },
   {
     id: "10",
-    name: "Bridal & Asoebi",
-    category: "bridal",
-    collection: "Bridal Collection",
+    name: "Complete Suits",
+    category: "suits",
+    collection: "Complete Suits",
     price: 650,
-    image: "/img2.jpg",
-    images: ["/img2.jpg", "/img1.jpg", "/haute1.jpg"],
-    description:
-      "Stunning bridal pieces for your most memorable day — gowns, Asoebi sets, and reception looks.",
+    image: "/suit1.jpeg",
+    images: ["/suit1.jpg", "/suit2.jpeg"],
+    description: "Stunning suits for your most memorable day ",
     tag: "BEST",
     sizes: ["S", "M", "L", "XL"],
     variants: [
       {
         id: "10-v1",
-        name: "Classic Bridal Gown",
+        name: "Classic Suits",
         price: 899,
-        image: "/img2.jpg",
-        images: ["/img2.jpg", "/img1.jpg", "/haute1.jpg"],
+        image: "/suit1.jpeg",
+        images: ["/suit1.jpeg", "/suit2.jpeg"],
         sizes: ["S", "M", "L", "XL"],
-        description:
-          "Sweetheart neckline with cathedral-length train. Your dream wedding dress, realized in exquisite detail.",
-      },
-      {
-        id: "10-v2",
-        name: "Asoebi Lace Set",
-        price: 650,
-        image: "/img1.jpg",
-        images: ["/img1.jpg", "/img2.jpg", "/img5.jpg"],
-        sizes: ["S", "M", "L", "XL"],
-        description:
-          "Matching George lace blouse and wrapper skirt for the perfect Asoebi look at any celebration.",
-      },
-      {
-        id: "10-v3",
-        name: "Bridal Reception Dress",
-        price: 750,
-        image: "/haute1.jpg",
-        images: ["/haute1.jpg", "/img5.jpg", "/img2.jpg"],
-        sizes: ["S", "M", "L", "XL"],
-        description:
-          "Chic mini-to-midi reception dress. Make a memorable exit at your own wedding.",
+        description: "Perfect office suits",
       },
     ],
   },
